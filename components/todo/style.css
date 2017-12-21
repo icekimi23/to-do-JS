@@ -61,7 +61,7 @@ input:focus {
     overflow: hidden;
 }
 
-.to-do__list-item_done{
+.to-do__list-item_done {
     text-decoration: line-through;
     color: rgba(0, 0, 0, 0.3)
 }
@@ -107,4 +107,50 @@ input:focus {
 .checkbox {
     width: 20px;
     height: 20px;
+}
+
+.button {
+    border: none;
+    background: #fff;
+    padding: 2px;
+    border-radius: 2px;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0.8;
+    line-height: 25px;
+}
+
+.button:focus {
+    outline: none;
+}
+
+.button:hover {
+    opacity: 1;
+}
+
+.to-do__list-footer-text {
+    float: left;
+    width: 22%;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 8px;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.to-do__list-footer-filter {
+    float: left;
+    width: 48%;
+    text-align: center;
+}
+
+.to-do__list-footer-clear {
+    float: left;
+    width: 30%;
+    text-align: center;
+}
+
+.to-do__list-footer-filter_selected{
+    color: #642fff;
+    font-weight: bold;
 }

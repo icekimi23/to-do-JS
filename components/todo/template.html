@@ -12,31 +12,33 @@
         <!-- элемент, выводящий список всех дел -->
         <div class="to-do__list">
             <ul class="to-do__list-content">
-                <li class="to-do__list-item">
+                {{#each itemsToShow as |item itemId|}}
+                <li class="to-do__list-item {{#if item.done}}to-do__list-item_done{{/if}}" id={{itemId}}>
                     <div class="to-do__list-item-checkbox">
-                        <input type = "checkbox" class = "checkbox">
+                        <input type="checkbox" class="checkbox to-do__list-item-checkbox-control" {{#if item.done}}
+                               checked {{/if}}>
                     </div>
-                    <div class="to-do__list-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+                    <div class="to-do__list-item-text">{{item.text}}</div>
                     <div class="to-do__list-item-delete"></div>
                 </li>
-                <li class="to-do__list-item to-do__list-item_done">
-                    <div class="to-do__list-item-checkbox">
-                        <input type = "checkbox" class = "checkbox">
-                    </div>
-                    <div class="to-do__list-item-text">something to do 1</div>
-                    <div class="to-do__list-item-delete"></div>
-                </li>
-                <li class="to-do__list-item">
-                    <div class="to-do__list-item-checkbox">
-                        <input type = "checkbox" class = "checkbox">
-                    </div>
-                    <div class="to-do__list-item-text">something to do 2</div>
-                    <div class="to-do__list-item-delete"></div>
-                </li>
+                {{/each}}
             </ul>
             <!-- элемент с элементами управления списком -->
             <div class="to-do__list-footer">
-
+                <div class="to-do__list-footer-text">
+                    {{#if itemsInList}}
+                    <p> {{ itemsInList }} to do </p>
+                    {{/if}}
+                </div>
+                <div class="to-do__list-footer-filter">
+                    <button class="button to-do__list-footer-filter-all {{#test}}to-do__list-footer-filter_selected{{/test}}"> All
+                    </button>
+                    <button class="button to-do__list-footer-filter-active"> Active</button>
+                    <button class="button to-do__list-footer-filter-completed"> Completed</button>
+                </div>
+                <div class="to-do__list-footer-clear">
+                    <button class="button to-do__list-footer-clear-all"> Clear completed</button>
+                </div>
             </div>
         </div>
     </div>
