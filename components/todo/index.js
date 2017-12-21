@@ -19,6 +19,8 @@ export class ToDo {
         this._el.addEventListener('keypress', this._onEnterPress.bind(this));
         this._el.addEventListener('click', this._onFilterChange.bind(this));
         this._el.addEventListener('click', this._onCompleteChange.bind(this));
+        this._el.addEventListener('click', this._onDeleteClick.bind(this));
+        this._el.addEventListener('click', this._onClearCompetedClick.bind(this));
     }
 
     _onEnterPress(event) {
@@ -50,7 +52,28 @@ export class ToDo {
         if (!checkBoxElement) return;
         let control = checkBoxElement.querySelector('.to-do__list-item-checkbox-control');
         let id = target.closest('.to-do__list-item').id;
-        this._itemsToDo[id].done = control.checked;
+        if (control.checked) {
+            this.completeItem(id);
+        } else {
+            this.uncompleteItem(id);
+        }
+        this.render();
+    }
+
+    _onDeleteClick() {
+        let target = event.target;
+        let deleteBtn = target.closest('.to-do__list-item-delete');
+        if (!deleteBtn) return;
+        let id = target.closest('.to-do__list-item').id;
+        this.deleteItem(id);
+        this.render();
+    }
+
+    _onClearCompetedClick() {
+        let target = event.target;
+        let clearCompletedBtn = target.closest('.to-do__list-footer-clear');
+        if (!clearCompletedBtn) return;
+        this.deleteCompleted();
         this.render();
     }
 
@@ -68,25 +91,49 @@ export class ToDo {
         };
     }
 
-    deleteItem() {
-
+    deleteItem(id) {
+        delete this._itemsToDo[id];
     }
 
-    completeItem() {
+    deleteCompleted() {
+        let toDelete = [];
+        for (let id in this._itemsToDo) {
+            let item = this._itemsToDo[id];
+            if (item.done) {
+                toDelete.push(id);
+            }
+        }
+        toDelete.forEach((id) => {
+            delete this._itemsToDo[id];
+        });
+    }
 
+    completeItem(id) {
+        this._itemsToDo[id].done = true;
+    }
+
+    uncompleteItem(id) {
+        this._itemsToDo[id].done = false;
     }
 
     render() {
         this._filterItems();
         this._el.innerHTML = template({
-            itemsInList: this.getItemsInList(),
+            itemsInList: this.getQuantityToDo(),
             itemsToShow: this._itemsToShow,
             filter: this._filter.done === undefined ? 'all' : this._filter.done ? 'active' : 'completed'
         });
     }
 
-    getItemsInList() {
-        return Object.keys(this._itemsToDo).length;
+    getQuantityToDo() {
+        let count = 0;
+        for (let id in this._itemsToDo) {
+            let item = this._itemsToDo[id];
+            if (!item.done) {
+                count++;
+            }
+        }
+        return count;
     }
 
     _filterItems() {
