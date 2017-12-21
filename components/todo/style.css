@@ -10,7 +10,7 @@ input:focus {
 }
 
 .to-do {
-    font-family: "Roboto", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Georgia", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .to-do__content {
@@ -71,7 +71,7 @@ input:focus {
 }
 
 .to-do__list-footer {
-    height: 24px;
+    height: 30px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     margin-top: -1px;
 }

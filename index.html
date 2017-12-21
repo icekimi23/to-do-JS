@@ -3,53 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>To do</title>
-    <link rel="stylesheet" href="css/todo.css">
+    <link rel="stylesheet" href="components/todo/style.css">
+    <script src="bundle.js" defer></script>
 </head>
 <body>
-
-<!-- весь блок компонента todo -->
-<div class="to-do">
-    <!--элемент, задающий геометрию-->
-    <div class="to-do__content">
-        <!-- заголовок блока -->
-        <div class="to-do__header"></div>
-
-        <!-- элемент для добавления нового дела -->
-        <div class="to-do__input-wrapper">
-            <input class="to-do__input">
-        </div>
-        <!-- элемент, выводящий список всех дел -->
-        <div class="to-do__list">
-            <ul class="to-do__list-content">
-                <li class="to-do__list-item">
-                    <div class="to-do__list-item-checkbox">
-                        <input type = "checkbox" class = "checkbox">
-                    </div>
-                    <div class="to-do__list-item-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
-                    <div class="to-do__list-item-delete"></div>
-                </li>
-                <li class="to-do__list-item to-do__list-item_done">
-                    <div class="to-do__list-item-checkbox">
-                        <input type = "checkbox" class = "checkbox">
-                    </div>
-                    <div class="to-do__list-item-text">something to do 1</div>
-                    <div class="to-do__list-item-delete"></div>
-                </li>
-                <li class="to-do__list-item">
-                    <div class="to-do__list-item-checkbox">
-                        <input type = "checkbox" class = "checkbox">
-                    </div>
-                    <div class="to-do__list-item-text">something to do 2</div>
-                    <div class="to-do__list-item-delete"></div>
-                </li>
-            </ul>
-            <!-- элемент с элементами управления списком -->
-            <div class="to-do__list-footer">
-
-            </div>
-        </div>
-    </div>
-</div>
-
+    <div id = "todo-container"></div>
 </body>
 </html>
