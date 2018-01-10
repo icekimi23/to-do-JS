@@ -6,7 +6,7 @@
 
 input:focus {
     border: none;
-    outline: none;
+    outline-style: none;
 }
 
 .to-do {
@@ -88,6 +88,31 @@ input:focus {
     width: 80%;
     word-break: break-all;
     margin-left: 10%;
+    cursor: default;
+}
+
+.editing-input{
+    width: 100%;
+    height: 50px;
+    padding: 5px 10px;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 24px;
+    position: relative;
+    z-index: 50;
+    display: none;
+}
+
+.editing-input:focus{
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.editing .editing-input{
+    display: block;
+}
+
+.editing .to-do__list-item-text{
+    display: none;
 }
 
 .to-do__list-item-delete {

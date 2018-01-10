@@ -21,6 +21,7 @@ export class ToDo {
         this._el.addEventListener('click', this._onCompleteChange.bind(this));
         this._el.addEventListener('click', this._onDeleteClick.bind(this));
         this._el.addEventListener('click', this._onClearCompetedClick.bind(this));
+        this._el.addEventListener('dblclick', this._onDoubleClick.bind(this));
     }
 
     _onEnterPress(event) {
@@ -77,6 +78,48 @@ export class ToDo {
         this.render();
     }
 
+    _onDoubleClick(event) {
+        let target = event.target;
+        let editingField = target.closest('.to-do__list-item-text');
+        if (!editingField) return;
+        let listItem = editingField.closest('.to-do__list-item');
+        if (!listItem) return;
+        this._enterEditingMode(listItem);
+    }
+
+    _onEditBlur(event){
+        let input = event.target;
+        let listItem = input.closest('.to-do__list-item');
+        if (!listItem) return;
+        this.editItem(listItem.id, input.value);
+    }
+
+    _onEditKeyPress(event){
+        let keyCode = event.keyCode;
+        if (keyCode !== 13) return;
+        let input = event.target;
+        let listItem = input.closest('.to-do__list-item');
+        if (!listItem) return;
+        this.editItem(listItem.id, input.value);
+    }
+
+    _quitEditingMode() {
+        let editingField = this._el.querySelectorAll('editing');
+        editingField.classList.remove('editing');
+        let editingInput = editingField.querySelector('.editing-input');
+    }
+
+    _enterEditingMode(target) {
+        let id = target.id;
+        let value = this._itemsToDo[id].text;
+        target.classList.add('editing');
+        let editingInput = target.querySelector('.editing-input');
+        editingInput.addEventListener('blur', this._onEditBlur.bind(this));
+        editingInput.addEventListener('keypress', this._onEditKeyPress.bind(this));
+        editingInput.value = value;
+        editingInput.focus();
+    }
+
     _focus() {
         let input = this._el.querySelector('.to-do__input');
         input.focus();
@@ -93,6 +136,17 @@ export class ToDo {
 
     deleteItem(id) {
         delete this._itemsToDo[id];
+    }
+
+    editItem(id, value) {
+        let item = this._itemsToDo[id];
+        if (!item) return;
+        if (value) {
+            item.text = value;
+        } else {
+            delete this._itemsToDo[id];
+        }
+        this.render();
     }
 
     deleteCompleted() {

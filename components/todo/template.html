@@ -16,10 +16,11 @@
                 <li class="to-do__list-item {{#if item.done}}to-do__list-item_done{{/if}}" id={{itemId}}>
                     <div class="to-do__list-item-checkbox">
                         <input type="checkbox" class="checkbox to-do__list-item-checkbox-control" {{#if item.done}}
-                               checked {{/if}}>
+                               checked {{/if}} />
                     </div>
                     <div class="to-do__list-item-text">{{item.text}}</div>
                     <div class="to-do__list-item-delete"></div>
+                    <input type="text" class = "editing-input" />
                 </li>
                 {{/each}}
             </ul>
